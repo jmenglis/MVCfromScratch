@@ -1,4 +1,4 @@
-﻿@model MVCfromScratch.Models.Lists
+﻿@model IEnumerable<MVCfromScratch.Models.Lists>
 @{
     ViewBag.Title = "Index";
     var username = User.Identity.Name;
@@ -8,7 +8,7 @@
    
 @using (Html.BeginForm()) {
     <span>Enter new item: </span>
-    @Html.TextBoxFor(u => u.Details)<br />
+    <input type="text" name="new_item" /><br />
     <span>Public post? </span><input type="checkbox" name="check_public" /><br />
     <input type="submit" value="Add Item" />
 }
@@ -25,14 +25,31 @@
                 <th style="text-align: center;">Delete</th>
                 <th style="text-align: center;">Public Post</th>
             </tr>
-            <tr>
-                <td style="text-align: center;"></td>
-                <td style="text-align: center;"></td>
-                <td style="text-align: center;"></td>
-                <td style="text-align: center;"></td>
-                <td style="text-align: center;"><a href="@Url.Action("Edit","Home")">Edit</a></td>
-                <td style="text-align: center;"><a href="@Url.Action("Delete","Home")">Edit</a></td>
-                <td style="text-align: center;"></td>
-            </tr>
         </thead>
+        <tbody>
+            @foreach (var item in Model) {
+            <tr>
+                <td style="text-align: center;">@Html.DisplayFor(modelItem => item.Id)</td>
+                <td style="text-align: center;">@Html.DisplayFor(modelItem => item.Details)</td>
+                <td style="text-align: center;">@Html.DisplayFor(modelItem => item.Time_Posted)</td>
+                <td style="text-align: center;">@Html.DisplayFor(modelItem => item.Time_Edited)</td>
+                <td style="text-align: center;"><a href="@Url.Action("Edit","Home")/@Html.DisplayFor(modelItem => item.Id)">Edit</a></td>
+                <td style="text-align: center;"><a class="pointer-arrow" onclick="deleteRow(@Html.DisplayFor(modelItem => item.Id))">Delete</a></td>
+                <td style="text-align: center;">@Html.DisplayFor(modelItem => item.Public)</td>
+            </tr>
+            }
+        </tbody>
 </table>
+<script>
+    function deleteRow(id) {
+        var r = confirm("Are you sure you want to delete this record?");
+        if (r == true) {
+            window.location.assign("/Home/Delete/" + id);
+        }
+    }
+</script>
+<style type="text/css">
+    .pointer-arrow:hover {
+        cursor: pointer;
+    }
+</style>

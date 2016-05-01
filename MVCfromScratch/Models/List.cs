@@ -8,7 +8,6 @@ namespace MVCfromScratch.Models {
     public class Lists {
         [Key]
         public int Id { get; set; }
-        [Required]
         public string Details { get; set; }
 
         public string Date_Posted { get; set; }
