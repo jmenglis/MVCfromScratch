@@ -1,4 +1,4 @@
-﻿@model MVCfromScratch.Models.LoginModel
+﻿@model MVCfromScratch.Models.Users
 @{
     ViewBag.Title = "Login";
 }
@@ -8,7 +8,14 @@
 @Html.ValidationSummary(true)
 
 @using (Html.BeginForm()) {
-    @Html.EditorForModel()
+    @Html.LabelFor(u => u.Email)<br/>
+    @Html.TextBoxFor(u => u.Email)<br/>
+    @Html.LabelFor(u => u.Password)<br/>
+    @Html.PasswordFor(u => u.Password)<br />
+    @Html.LabelFor(u => u.Name)<br />
+    @Html.TextBoxFor(u => u.Name)<br />
+    @Html.LabelFor(u => u.Country)<br />
+    @Html.TextBoxFor(u => u.Country)<br />
     <p>
         <button type="submit">Log In</button>
     </p>

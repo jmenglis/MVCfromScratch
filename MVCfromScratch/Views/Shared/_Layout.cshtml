@@ -25,6 +25,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="@Url.Action("Registration","Auth")">Register</a>
+                    </li>
                     @if (@User.Identity.IsAuthenticated) {
                     <li>
                         <a href="@Url.Action("Logout", "Auth")">Logout</a>
